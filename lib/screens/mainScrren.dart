@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 
 class Mainscrren extends StatefulWidget {
   const Mainscrren({super.key});
@@ -18,6 +19,7 @@ class _MainscrrenState extends State<Mainscrren> {
   final Box doneTasksBox = Hive.box('doneTasks');
   final ImagePicker picker = ImagePicker();
   final TextEditingController texController = TextEditingController();
+  final DateTime dateTimePicker = DateTime.now();
 
   Future<void> pickImage() async {
     var pickedFile = await picker.pickImage(source: ImageSource.camera);
@@ -151,6 +153,11 @@ class _MainscrrenState extends State<Mainscrren> {
                                       ),
                                     ),
                                   ],
+                                ),
+                                Text(
+                                  DateFormat(
+                                    'dd/MM/yyyy  hh:mm a',
+                                  ).format(dateTimePicker),
                                 ),
                                 IconButton(
                                   onPressed: () => removeTask(index),
